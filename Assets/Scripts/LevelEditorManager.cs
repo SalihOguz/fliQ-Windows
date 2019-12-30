@@ -29,7 +29,7 @@ public class LevelEditorManager : MonoBehaviour {
 			} 
 			themes[i] = new ColorTheme();
 			themes[i].colors = new Color[7];
-			for (int j = 0; j < 6; j++)
+			for (int j = 0; j < 7; j++)
 			{
 				themes[i].colors[j] = themeObject.transform.GetChild(j).GetComponent<Image>().color;
 			}
@@ -237,7 +237,7 @@ public class LevelEditorManager : MonoBehaviour {
 				gm.transform.GetChild(0).GetComponent<Toggle>().interactable = true;
 				gm.transform.GetChild(1).GetComponent<Toggle>().interactable = true;
 				gm.transform.GetChild(2).GetComponent<Toggle>().interactable = true;
-				for (int j = 0; j < 5; j++)
+				for (int j = 0; j < 6; j++)
 				{
 					gm.transform.GetChild(3).GetChild(j).GetComponent<Image>().color = themes[colorThemeIndex].colors[j];
 				}

@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour {
 	public GenerateLevel generator;
 	public BGColors bgcolors;
 
+	public Image bgPattern1;
+	public Image bgPattern2;
+	public Image bgPattern3;
+
 	private static GameManager _instance;
     public static GameManager instance {
         get {
@@ -40,7 +44,21 @@ public class GameManager : MonoBehaviour {
 		levelText.text = "LEVEL "+currentLevel; //"STAGE "+((currentLevel/5)+1) +" | LEVEL " + ((currentLevel%5)+1);
 		generator.GenerateStart(currentLevel);
 		
-
+		if ((currentLevel - 1) / 5 == 0)
+		{
+			bgPattern1.gameObject.SetActive(true);
+			trueBar.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>().color = bgPattern1.color;
+		}
+		else if ((currentLevel - 1) / 5 == 1)
+		{
+			bgPattern2.gameObject.SetActive(true);
+			trueBar.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>().color = bgPattern2.color;
+		}
+		else if ((currentLevel - 1) / 5 == 2)
+		{
+			bgPattern3.gameObject.SetActive(true);
+			trueBar.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>().color = bgPattern3.color;
+		}
 	}
 
 	public void Init() {
@@ -52,12 +70,12 @@ public class GameManager : MonoBehaviour {
 
 		moveCount = JsonUtility.FromJson<MoveCounts>(Resources.Load<TextAsset>("MoveCountsData").text).moveCounts[currentLevel];
 		moveCountText.text = moveCount.ToString();
-		Camera.main.GetComponent<Camera>().backgroundColor = bgcolors.BGColor[currentLevel];
+		Camera.main.GetComponent<Camera>().backgroundColor = bgcolors.BGColor[currentLevel - 1];
 		GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Rules/Rule" + currentLevel), Vector3.zero, Quaternion.identity, GameObject.Find("UI_header").transform);
 		go.transform.localPosition = Vector3.zero;
 
 		// to start with partialy filled bar
-		trueBar.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>().color = bgcolors.BGColor[currentLevel];
+		trueBar.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>().color = bgcolors.BGColor[currentLevel - 1];
 		VictoryCheck();
 		moveCount++;
 		moveCountText.text = moveCount.ToString();
