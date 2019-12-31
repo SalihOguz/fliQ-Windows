@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject winPanel;
 	public GameObject losePanel;
 	public GameObject settingsPanel;
+	public GameObject Tutorial1;
+	public GameObject Tutorial2;
 	public Text levelText;
 	public GenerateLevel generator;
 	public BGColors bgcolors;
@@ -58,6 +60,15 @@ public class GameManager : MonoBehaviour {
 		{
 			bgPattern3.gameObject.SetActive(true);
 			trueBar.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>().color = bgPattern3.color;
+		}
+
+		if (currentLevel == 1)
+		{
+			Tutorial1.SetActive(true);
+		}
+		else if (currentLevel == 2)
+		{
+			Tutorial2.SetActive(true);
 		}
 	}
 
@@ -138,11 +149,19 @@ public class GameManager : MonoBehaviour {
 	void Win()
 	{
 		winPanel.SetActive(true);
+
+		if(currentLevel >= 15)
+		{
+			winPanel.transform.Find("NextLevelButton").gameObject.SetActive(false);
+			winPanel.transform.Find("Text").GetComponent<Text>().text = "Game Over";
+			winPanel.transform.Find("TextInfo").gameObject.SetActive(true);
+		}
 		print("You Win!");
 		if(currentLevel-1 >= PlayerPrefs.GetInt("latestLevel"))
 		{
 			PlayerPrefs.SetInt("latestLevel", currentLevel);
 		}
+		
 	}
 
 	public void LoadScene(string sceneName)
