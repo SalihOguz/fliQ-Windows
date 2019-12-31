@@ -103,14 +103,14 @@ public class Flip : MonoBehaviour {
 					holdEffect.GetComponent<SpriteRenderer>().color = new Color(colColor.r, colColor.g, colColor.b, 0.8f);
 					LeanTween.scale(holdEffect, holdEffect.transform.localScale*1.35f, 0.2f);
 					LeanTween.color(holdEffect, new Color(colColor.r, colColor.g, colColor.b, 0), 0.3f).setOnComplete(delegate(){Destroy(holdEffect);});
-					Vibration.Vibrate(25);
+					//Vibration.Vibrate(25);
 				}
 			}
 			else if (chosens.Count > 1 && chosens[chosens.Count-2] == col.gameObject) // if piece is touched before and this is a reverse touch
 			{
 				LeanTween.scale(chosens[chosens.Count-1], chosens[chosens.Count-1].GetComponent<FlipPiece>().startScale, 0.2f);
 				chosens.RemoveAt(chosens.Count-1);
-				Vibration.Vibrate(10);
+				//Vibration.Vibrate(10);
 			}
 			else if (chosens.Count == 1 && chosens[0] == col.gameObject) // if piece is the last piece, user doesn't want to play
 			{

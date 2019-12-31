@@ -174,4 +174,9 @@ public class GameManager : MonoBehaviour {
 		PlayerPrefs.SetInt("clickedLevel", currentLevel+1);
 		LoadScene("Game");
 	}
+
+	public void Exit()
+	{
+		Application.Quit();
+	}
 }
